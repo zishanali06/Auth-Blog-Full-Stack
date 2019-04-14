@@ -1,5 +1,7 @@
 import * as mysql from 'mysql';
 import auth from '../config';
+
+//importing table queries
 import Blogs from './queries/blogs';
 import Users from './queries/users';
 import AccessTokens from './queries/accesstokens';
