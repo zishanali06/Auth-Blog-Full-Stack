@@ -1,6 +1,6 @@
 import * as mysql from 'mysql';
 import auth from '../config';
-import Blogs from './blogs';
+import Blogs from './queries/blogs';
 
 export const Connection = mysql.createConnection(auth.mysql);
 
