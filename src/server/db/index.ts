@@ -1,6 +1,8 @@
 import * as mysql from 'mysql';
 import auth from '../config';
 import Blogs from './queries/blogs';
+import Users from './queries/users';
+import AccessTokens from './queries/accesstokens';
 
 export const Connection = mysql.createConnection(auth.mysql);
 
@@ -14,6 +16,8 @@ export const Query = (query: string, values?: Array<number | string>) => {
 };
 
 export default {
-    Blogs
+    Blogs,
+    Users,
+    AccessTokens
 };
 
