@@ -42,6 +42,22 @@ export default class Changepost extends React.Component<ChangepostProps, Changep
             body: JSON.stringify(addpost)
         }).then(() => this.props.history.push(`/blog/${this.props.location.state.id}`))
         .catch(e => console.log(e));
+    }
+
+    handleDelete = (e: React.MouseEvent) => {
+        e.preventDefault();
+        fetch(`/api/blogs/delete/${this.props.location.state.id}`, {
+            method: "DELETE",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrer: "no-referrer",
+        }).then(() => this.props.history.push(`/`))
+        .catch(e => console.log(e));
 
     }
 
@@ -63,6 +79,7 @@ export default class Changepost extends React.Component<ChangepostProps, Changep
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} value={this.state.content} onChange={this.handleContent}></textarea>
                         </section>
                         <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Save Edit</button>
+                        <button type="submit" className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
                     </form>
                 </section>
                 <section className="col-2"></section>

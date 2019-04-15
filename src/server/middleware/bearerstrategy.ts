@@ -15,5 +15,5 @@ passport.use(new BearerStrategy.Strategy(async (token, done) => {
         }
     } catch (error) {
         done(error);
-    }
+    };
 }));
