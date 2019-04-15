@@ -1,5 +1,12 @@
 import * as path from 'path';
 import * as express from 'express';
+import * as passport from 'passport';
+
+//importing passport strategies
+import './middleware/localstrategy';
+import './middleware/bearerstrategy';
+
+//importing router
 import apiRouter from './routes';
 
 const app = express();
@@ -7,9 +14,13 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 let p = path.join(__dirname, '../public');
-console.log(p);
 
 app.use(express.static(p));
+
+//initialize passport strategies to intercept requests at this point
+app.use(passport.initialize());
+
+//adding my api routes to middleware
 app.use(apiRouter);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
