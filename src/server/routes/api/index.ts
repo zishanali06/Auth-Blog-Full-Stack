@@ -6,7 +6,6 @@ import apiBlogRoutes from './blogs';
 const router = express.Router();
 
 router.use((req, res, next) => {
-    console.log(req.user);
     passport.authenticate('bearer', { session: false}, (err, user, info) => {
         if(err) console.log(err);
         if(user) req.user = user;

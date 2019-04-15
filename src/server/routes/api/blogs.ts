@@ -5,7 +5,7 @@ import { RequestHandler } from 'express-serve-static-core';
 const router = express.Router();
 
 const isAdmin: RequestHandler = (req, res, next) => {
-    if(!req.user || req.user.role !== 'admin') {
+    if(!req.user || req.user.role !== 'guest') {
         return res.sendStatus(401);
     } else {
         return next();
