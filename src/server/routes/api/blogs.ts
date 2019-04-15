@@ -1,7 +1,16 @@
 import * as express from 'express';
 import db from '../../db';
+import { RequestHandler } from 'express-serve-static-core';
 
 const router = express.Router();
+
+const isAdmin: RequestHandler = (req, res, next) => {
+    if(!req.user || req.user.role !== 'admin') {
+        return res.sendStatus(401);
+    } else {
+        return next();
+    }
+}
 
 //get tags for specific post
 router.get('/tags/:id', async (req, res) => {
@@ -66,7 +75,7 @@ router.put('/change/:id', async (req, res) => {
 })
 
 //delete blog post
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', isAdmin, async (req, res) => {
     try {
         await db.Blogs.remove(req.params.id);
         res.sendStatus(200);
